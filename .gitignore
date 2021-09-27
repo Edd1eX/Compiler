@@ -1,0 +1,6 @@
+.gitignore
+.git
+.idea
+cmake-build-debug
+version1
+
