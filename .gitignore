@@ -1,7 +1,0 @@
-.gitignore
-.git
-.idea
-cmake-build-debug
-version1
-compiler.zip
-output.txt
