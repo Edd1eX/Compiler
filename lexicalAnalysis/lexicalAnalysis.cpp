@@ -2,7 +2,7 @@
 // Created by 张瑞轩 on 2021/9/23.
 //
 
-#include "lexicalAnalysis.h"
+#include "../include/lexicalAnalysis.h"
 
 vector <char> str;
 vector <word> lexical;
@@ -19,11 +19,12 @@ map<string,string> keyword = {{"return", RETURNTK},
                               {"printf",PRINTFTK},
                               {"void",VOIDTK}};
 int line = 1;
-void analysis()
+vector<word> lexicalAnalysis()
 {
     getText();
     go();
-    output();
+//    output();
+    return lexical;
 }
 
 void getText()
@@ -216,8 +217,6 @@ int MULTr(int loc)
 
 int DIVr(int loc)
 {
-    // TODO
-    // 注释
     if (str[loc + 1] == '/') {
         return skipComment1(loc + 2);
     }

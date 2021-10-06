@@ -1,7 +1,9 @@
-#include "lexicalAnalysis.h"
+#include "include/lexicalAnalysis.h"
+#include "include/grammaAnalysis.h"
 
 int main()
 {
-    analysis();
+    vector<word> lexical = lexicalAnalysis();
+    grammaAnalysis(lexical);
     return 0;
 }

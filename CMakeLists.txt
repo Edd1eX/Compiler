@@ -3,4 +3,4 @@ project(Compiler)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(Compiler main.cpp word.cpp word.h lexicalAnalysis.cpp lexicalAnalysis.h defination.cpp)
+add_executable(Compiler main.cpp class/word.cpp include/word.h lexicalAnalysis/lexicalAnalysis.cpp include/lexicalAnalysis.h grammaAnalysis/grammaAnalysis.cpp include/grammaAnalysis.h settings/defination.h)

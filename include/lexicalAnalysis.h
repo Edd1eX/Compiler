@@ -3,13 +3,13 @@
 //
 
 #include "word.h"
-#include "defination.cpp"
+#include "../settings/defination.h"
 using namespace std;
 
 #ifndef COMPILER_LEXICALANALYSIS_H
 #define COMPILER_LEXICALANALYSIS_H
 
-void analysis();
+vector<word> lexicalAnalysis();
 void output();
 void getText();
 void go();
