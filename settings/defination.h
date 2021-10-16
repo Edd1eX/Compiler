@@ -5,44 +5,44 @@
 #ifndef COMPILER_DEFINATION_H
 #define COMPILER_DEFINATION_H
 
-const string IDENFR = "IDENFR";
-const string INTCON = "INTCON";
-const string STRCON = "STRCON";
-const string MAINTK = "MAINTK";
-const string CONSTTK = "CONSTTK";
-const string INTTK = "INTTK";
-const string BREAKTK = "BREAKTK";
-const string CONTINUETK = "CONTINUETK";
-const string IFTK = "IFTK";
-const string ELSETK = "ELSETK";
-const string NOT = "NOT";
-const string AND = "AND";
-const string OR = "OR";
-const string WHILETK = "WHILETK";
-const string GETINTTK = "GETINTTK";
-const string PRINTFTK = "PRINTFTK";
-const string RETURNTK = "RETURNTK";
-const string PLUS = "PLUS";
-const string MINU = "MINU";
-const string VOIDTK = "VOIDTK";
-const string MULT = "MULT";
-const string DIV = "DIV";
-const string MOD = "MOD";
-const string LSS = "LSS";
-const string LEQ = "LEQ";
-const string GRE = "GRE";
-const string GEQ = "GEQ";
-const string EQL = "EQL";
-const string NEQ = "NEQ";
-const string ASSIGN = "ASSIGN";
-const string SEMICN = "SEMICN";
-const string COMMA = "COMMA";
-const string LPARENT = "LPARENT";
-const string RPARENT = "RPARENT";
-const string LBRACK = "LBRACK";
-const string RBRACK = "RBRACK";
-const string LBRACE = "LBRACE";
-const string RBRACE = "RBRACE";
+const string IDENFR = "IDENFR";     // 变量
+const string INTCON = "INTCON";     // 整数
+const string STRCON = "STRCON";     // 字符串
+const string MAINTK = "MAINTK";     // main
+const string CONSTTK = "CONSTTK";   // const
+const string INTTK = "INTTK";       // int
+const string BREAKTK = "BREAKTK";   // break
+const string CONTINUETK = "CONTINUETK"; // continue
+const string IFTK = "IFTK";         // if
+const string ELSETK = "ELSETK";     // else
+const string NOT = "NOT";           // !
+const string AND = "AND";           // &&
+const string OR = "OR";             // ||
+const string WHILETK = "WHILETK";   // while
+const string GETINTTK = "GETINTTK"; // getint
+const string PRINTFTK = "PRINTFTK"; // printf
+const string RETURNTK = "RETURNTK"; // return
+const string PLUS = "PLUS";         // +
+const string MINU = "MINU";         // -
+const string VOIDTK = "VOIDTK";     // void
+const string MULT = "MULT";         // *
+const string DIV = "DIV";           // /
+const string MOD = "MOD";           // %
+const string LSS = "LSS";           // <
+const string LEQ = "LEQ";           // <=
+const string GRE = "GRE";           // >
+const string GEQ = "GEQ";           // >=
+const string EQL = "EQL";           // ==
+const string NEQ = "NEQ";           // !=
+const string ASSIGN = "ASSIGN";     // =
+const string SEMICN = "SEMICN";     // ;
+const string COMMA = "COMMA";       // ,
+const string LPARENT = "LPARENT";   // (
+const string RPARENT = "RPARENT";   // )
+const string LBRACK = "LBRACK";     // [
+const string RBRACK = "RBRACK";     // ]
+const string LBRACE = "LBRACE";     // {
+const string RBRACE = "RBRACE";     // }
 
 const string CompUnit = "<CompUnit>";
 //const string Decl = "<Decl>";
