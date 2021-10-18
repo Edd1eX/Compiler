@@ -10,7 +10,7 @@ class syntax {
 public:
     string s;
     string category;
-    int line{};
+    int line;
     /*
      * flag:
      * 0  —— 终结符
