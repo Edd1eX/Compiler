@@ -5,12 +5,14 @@
 #include "word.h"
 #include "syntax.h"
 #include "../settings/defination.h"
+#include "errorType.h"
+#include "symbol.h"
 
 #ifndef COMPILER_SYNTAXANALYSIS_H
 #define COMPILER_SYNTAXANALYSIS_H
 
 void syntaxAnalysis(vector<word> lexical);
-
+void errorAnalysis();
 syntax CompUnitgr();
 syntax Declgr();
 syntax ConstDeclgr();
@@ -47,5 +49,8 @@ string get(int loc);
 syntax error();
 syntax get_next();
 void output(syntax s);
-
+void push_error(string type, int lo);
+void error_output();
+int illegalSymbol();
+pair<int, bool> find_in_exp(syntax* s);
 #endif //COMPILER_SYNTAXANALYSIS_H
