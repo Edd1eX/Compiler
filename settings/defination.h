@@ -77,4 +77,45 @@ const string LAndExp = "<LAndExp>";
 const string LOrExp = "<LOrExp>";
 const string ConstExp = "<ConstExp>";
 
+// instruction
+const string Iadd = "add";
+const string Ibez = "bez";
+const string Ibnz = "bnz";
+const string Icb = "cb";
+const string Icnb = "cnb";
+const string Icopy = "copy";
+const string Idb = "db";
+const string Idiv = "div";
+const string Idnb = "dnb";
+const string Iend = "end";
+const string Ieq = "eq";
+const string Igt = "gt";
+const string Igte = "gte";
+const string Iinit = "init";
+const string Iinit2 = "init2";
+const string Ijal = "jal";
+const string Ijback = "jback";
+const string Ijump = "jump";
+const string Ildi = "ldi";
+const string Ileq = "leq";
+const string Ilss = "lss";
+const string Imod = "mod";
+const string Imul = "mul";
+const string Ineq = "neq";
+const string Ipop = "pop";
+const string Iprint = "print";
+const string Ipush = "push";
+const string Iread = "read";
+const string Istorei = "storei";
+const string Isub = "sub";
+const string Iland = "land";
+const string Ilor = "lor";
+const string Iops = "ops";
+const string Inot = "not";
+const string Iclear = "clear";
+const string Ioff = "off";
+const string Ioff2 = "off2";
+
+const int baseline = 0x82f64a83;
+
 #endif //COMPILER_DEFINATION_H

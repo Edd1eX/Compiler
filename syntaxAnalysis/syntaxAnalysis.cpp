@@ -1238,7 +1238,7 @@ void output(syntax s)
 }
 void errorAnalysis()
 {
-    error_output();
+//    error_output();
 //    cout << symbols.toString() << endl;
 }
 void push_error(string type, int lo)
