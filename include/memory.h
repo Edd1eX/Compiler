@@ -10,6 +10,9 @@ class my_array {
 public:
     string name;
     int div = 0;
+    int length = 1;
+    int num;
+    int *arr;
     vector<int> params;
     vector<int> res;
 
@@ -17,27 +20,28 @@ public:
     my_array(string name);
     void push(int n);
     void count();
+    void init();
+    void assign(int off, int val);
+    int get_val(int off);
+    int *get_array(int off);
+    void set_array(int *arr);
     int get(int n);
-    int sum();
+    string tostring();
 };
 
 class memory {
 public:
-    vector<int> mem;
-    map<string,int> id2mem;
     map<string,my_array> id2array;
     memory *father = nullptr;
 
     memory();
-    void init(string name);
-    void init(string name,int length);
     void add_array(my_array);
     int find(string name);
-    int get(int loc);
+    int get(string name, int off);
     int get_div(string name);
     int get_n(string name, int n);
-    vector<int> get_mem(string name, int off, int length);
-    void assign(int loc, int x);
+    int *get_array(string name, int off);
+    void assign(string name, int off, int val);
     string tostring();
 };
 
@@ -50,14 +54,12 @@ public:
     void add();
     void pop();
     memory* top();
-    void init(string name);
-    void init(string name,int length);
     void add_array(my_array);
-    void assign(string name, int off,int x);
+    void assign(string name, int off,int val);
     int get(string name, int off);
     int get_n(string name, int n);
     int get_div(string name);
-    vector<int> get_mem(string name, int off, int length);
+    int *get_array(string name, int off);
     string tostring();
 };
 

@@ -4,43 +4,25 @@
 
 #include "../include/memory.h"
 
-void memory::init(string name) {
-    if (id2mem.count(name) == 0) {
-        int loc = mem.size();
-        id2mem[name] = loc;
-        mem.push_back(0);
-    }
-}
-
-void memory::init(string name, int length) {
-    if (id2mem.count(name) == 0) {
-        int loc = mem.size();
-        id2mem[name] = loc;
-        for(int i = 0;i < length; i++) {
-            mem.push_back(0);
-        }
-    }
-}
 
 int memory::find(string name) {
-    if (id2mem.count(name) == 0) {
-        return -1;
+    if (id2array.count(name) == 0) {
+        return 0;
     }
-    return id2mem[name];
+    return 1;
 }
 
-int memory::get(int loc) {
-    if (loc >= mem.size()) {
-        return -1;
+int memory::get(string name, int off) {
+    if (find(name)) {
+        return id2array[name].get_val(off);
     }
-    return mem[loc];
+    return -1;
 }
 
-void memory::assign(int loc, int x) {
-    vector<int> *v = &mem;
-    if (loc < mem.size())
-//        mem[loc] = x;
-        v->at(loc) = x;
+void memory::assign(string name, int off, int val) {
+    if (find(name)) {
+        id2array[name].assign(off, val);
+    }
 }
 
 memory::memory() {
@@ -49,16 +31,9 @@ memory::memory() {
 
 string memory::tostring() {
     string s;
-    int num = 0;
-    for (int n:mem) {
-        s.append(to_string(n) + "  ");
-        num++;
-        if (num >= 10) {
-            num%=10;
-            s.append("\n");
-        }
+    for(auto & iter : id2array) {
+        s.append(iter.second.tostring() + "\n");
     }
-    s.append("\n");
     return s;
 }
 
@@ -89,17 +64,14 @@ int memory::get_n(string name, int n) {
     return 0;
 }
 
-vector<int> memory::get_mem(string name, int off, int length) {
-    vector<int> v;
-    if (id2mem.count(name) > 0) {
-        int loc = id2mem[name] + off;
-        for (int i = 0; i < length; i++) {
-            if (i + loc < mem.size()) {
-                v.push_back(mem[i + loc]);
-            }
-        }
+int *memory::get_array(string name, int off) {
+    if (id2array.count(name) > 0) {
+        return id2array[name].get_array(off);
     }
-    return v;
+    else if (father != nullptr) {
+        return father->get_array(name, off);
+    }
+    return nullptr;
 }
 
 memoryStack::memoryStack(memory* basic) {
@@ -118,11 +90,11 @@ void memoryStack::assign(string name,int off, int x)
     memory *p = &memories.top();
     while(p!= nullptr) {
         int loc = p->find(name);
-        if(loc == -1) {
+        if(loc == 0) {
             p = p->father;
             continue;
         }
-        p->assign(loc + off, x);
+        p->assign(name, off, x);
         break;
     }
 }
@@ -131,11 +103,11 @@ int memoryStack::get(string name, int off) {
     memory *p = &memories.top();
     while(p!= nullptr) {
         int loc = p->find(name);
-        if(loc == -1) {
+        if(loc == 0) {
             p = p->father;
             continue;
         }
-        return p->get(loc + off);
+        return p->get(name, off);
     }
     return -1;
 }
@@ -160,14 +132,6 @@ string memoryStack::tostring() {
     return s;
 }
 
-void memoryStack::init(string name) {
-    top()->init(name);
-}
-
-void memoryStack::init(string name, int length) {
-    top()->init(name,length);
-}
-
 void memoryStack::add_array(my_array arr) {
     top()->add_array(arr);
 }
@@ -180,17 +144,8 @@ int memoryStack::get_n(string name, int n) {
     return top()->get_n(name, n);
 }
 
-vector<int> memoryStack::get_mem(string name, int off, int length) {
-    memory *p = &memories.top();
-    while(p!= nullptr) {
-        vector<int> v = p->get_mem(name, off, length);
-        if(v.empty()) {
-            p = p->father;
-            continue;
-        }
-        return v;
-    }
-    return vector<int>();
+int *memoryStack::get_array(string name, int off) {
+    return top()->get_array(name, off);
 }
 
 memoryStack* stacks::top() {
@@ -235,17 +190,6 @@ int my_array::get(int n) {
     return 0;
 }
 
-int my_array::sum() {
-    if (div > 0) {
-        int res = 1;
-        for (int num : params) {
-            res *= num;
-        }
-        return res;
-    }
-    return 0;
-}
-
 my_array::my_array() {
 
 }
@@ -257,4 +201,70 @@ void my_array::count() {
         t *= params[i];
         res.push_back(t);
     }
+    length = t;
+}
+
+void my_array::init() {
+    if (div > 0) {
+        arr = (int *)malloc(sizeof(int) * length);
+        for (int i = 0;i < length; i++) {
+            arr[i] = 0;
+        }
+    }
+    else {
+        num = 0;
+    }
+}
+
+void my_array::assign(int loc, int val) {
+    if (loc < length) {
+        if (div == 0) {
+            num = val;
+        }
+        else {
+            arr[loc] = val;
+        }
+    }
+}
+
+int my_array::get_val(int loc) {
+    if (loc < length) {
+        if (div == 0) {
+            return num;
+        }
+        else {
+            return arr[loc];
+        }
+    }
+    return 0;
+}
+
+int *my_array::get_array(int loc) {
+    if (loc < length && div > 0) {
+        return arr + loc;
+    }
+    return nullptr;
+}
+
+void my_array::set_array(int *arr) {
+    this->arr = arr;
+}
+
+string my_array::tostring() {
+    string s = "";
+    s += name + ": ";
+    if (div == 0) {
+        s += to_string(num);
+    }
+    else {
+        for (int i = 0; i < length; i++) {
+            if (i == 0) {
+                s += to_string(arr[i]);
+            }
+            else {
+                s += ' ' + to_string(arr[i]);
+            }
+        }
+    }
+    return s;
 }

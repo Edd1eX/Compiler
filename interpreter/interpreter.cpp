@@ -6,7 +6,8 @@
 
 stack<int> st;
 stack<int> lines;
-stack<vector<int>> arrays;
+stack<int*> arrays;
+stack<int> len;
 int _loc = 0;
 bool running = false;
 stacks mem;
@@ -367,8 +368,9 @@ void init(string s)
         length *= l;
     }
     arr.count();
+    arr.init();
     mem.top()->add_array(arr);
-    mem.top()->init(s, length);
+//    mem.top()->init(s, length);
 }
 void init2(string s)
 {
@@ -383,17 +385,18 @@ void init2(string s)
         arr.push(l);
         length *= l;
     }
-    vector<int> v = arrays.top();
+    int *v = arrays.top();
+    int size = len.top();
     arrays.pop();
-    int size = v.size();
+    len.pop();
     arr.push(size/length);
-
+    arr.set_array(v);
     int off = st.top();
 
     st.pop();
     arr.count();
     mem.top()->add_array(arr);
-    mem.top()->init(s, size);
+//    mem.top()->init(s, size);
 
     for (int i = 0;i < size; i++) {
         mem.top()->assign(s, i, v[i]);
@@ -552,8 +555,10 @@ void off(string s, int div)
         sum += x * mem.top()->get_n(s, i);
     }
     if (div_real > div) {
-        arrays.push(mem.top()->get_mem(s, sum,
-                           mem.top()->get_n(s, div_real - div)));
+        len.push(mem.top()->get_n(s, div_real - div));
+        arrays.push(mem.top()->get_array(s, sum));
+//        arrays.push(mem.top()->get_mem(s, sum,
+//                           mem.top()->get_n(s, div_real - div)));
 //        for (int i : arrays.top())
 //            cout<<i<<" ";
     }
@@ -570,8 +575,10 @@ void off2(string s, int div)
         sum += x * mem.top()->get_n(s, i);
     }
     if (div_real > div) {
-        arrays.push(mem.top()->get_mem(s, sum,
-                                       mem.top()->get_n(s, div_real - div)));
+        len.push(mem.top()->get_n(s, div_real - div));
+        arrays.push(mem.top()->get_array(s, sum));
+//        arrays.push(mem.top()->get_mem(s, sum,
+//                                       mem.top()->get_n(s, div_real - div)));
 //        for (int i : arrays.top())
 //            cout<<i<<" ";
 //        cout<<sum<<endl;
